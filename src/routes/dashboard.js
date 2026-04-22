@@ -47,8 +47,8 @@ router.get('/admin', authenticate, requireAdmin, async (req, res) => {
 
     res.json(summary);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Dashboard admin error:', err.message, err.stack);
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 });
 
