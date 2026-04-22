@@ -32,7 +32,7 @@ router.get('/admin', authenticate, requireAdmin, async (req, res) => {
       atRiskFields: withStatus.filter(f => f.status === 'At Risk').map(f => ({ id: f.id, name: f.name, stage: f.stage, agent_name: f.agent_name }))
     };
 
-    const [agentCount] = await pool.query('SELECT COUNT(*) AS count FROM users WHERE role = "agent"');
+    const [agentCount] = await pool.query('SELECT COUNT(*) AS count FROM users WHERE role = ?', ['agent']);
     summary.totalAgents = agentCount[0].count;
 
     const [recentUpdates] = await pool.query(`

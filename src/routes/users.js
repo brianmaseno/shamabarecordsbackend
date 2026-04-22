@@ -9,7 +9,8 @@ const { authenticate, requireAdmin } = require('../middleware/auth');
 router.get('/agents', authenticate, requireAdmin, async (req, res) => {
   try {
     const [rows] = await pool.query(
-      'SELECT id, name, email, created_at FROM users WHERE role = "agent" ORDER BY name'
+      'SELECT id, name, email, created_at FROM users WHERE role = ? ORDER BY name',
+      ['agent']
     );
     res.json(rows);
   } catch (err) {
