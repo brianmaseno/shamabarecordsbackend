@@ -10,19 +10,7 @@ const dashboardRoutes = require('./src/routes/dashboard');
 
 const app = express();
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'https://shambarecordsfrontend.onrender.com',
-  process.env.FRONTEND_URL
-].filter(Boolean);
-
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? allowedOrigins 
-    : true,
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
